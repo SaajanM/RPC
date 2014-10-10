@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
+  <Identity Name="44660SimpleGamingApps.RockPaperScissorsChallenge" Publisher="CN=527684F7-0A0F-4878-B808-9AB45D037893" Version="1.1.0.1" />
+  <Properties>
+    <DisplayName>RockPaperScissors Challenge</DisplayName>
+    <PublisherDisplayName>SimpleGamingApps</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.3.0</OSMinVersion>
+    <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="WindowsFormsApplication7.Windows.App">
+      <m2:VisualElements DisplayName="RockPaperScissors Challenge" Square150x150Logo="Assets\ccb41fc47aff8f3aa107648de914f6c1 (2).png" Square30x30Logo="Assets\SmallLogo.png" Description="WindowsFormsApplication7.Windows" ForegroundText="light" BackgroundColor="#000000">
+        <m2:DefaultTile ShortName="Rock Paper Scissors Challege" DefaultSize="square150x150Logo" Square70x70Logo="Assets\Square70x70Logo.png">
+          <m2:ShowNameOnTiles>
+            <m2:ShowOn Tile="square150x150Logo" />
+          </m2:ShowNameOnTiles>
+        </m2:DefaultTile>
+        <m2:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#FFFFFF" />
+        <m2:InitialRotationPreference>
+          <m2:Rotation Preference="landscape" />
+          <m2:Rotation Preference="landscapeFlipped" />
+        </m2:InitialRotationPreference>
+      </m2:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <Capability Name="picturesLibrary" />
+    <Capability Name="musicLibrary" />
+  </Capabilities>
+</Package>

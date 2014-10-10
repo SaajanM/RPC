@@ -1,0 +1,32 @@
+﻿<Page
+    x:Class="RockPaperScissorsChallenge.Page1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RockPaperScissorsChallenge"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Form2_Load">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBox HorizontalAlignment="Left" Margin="24,24,0,0" TextWrapping="Wrap" Text="Number of wins until victory" VerticalAlignment="Top" IsReadOnly="True" Height="46"/>
+        <TextBox x:Name="wins" HorizontalAlignment="Left" Margin="115,102,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" RenderTransformOrigin="-0.101,-0.778" Width="132"/>
+        <TextBox HorizontalAlignment="Left" Margin="85,159,0,0" TextWrapping="Wrap" Text="           Sound Effects" VerticalAlignment="Top" IsReadOnly="True" Height="36" Width="208" TextChanged="TextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Margin="85,331,0,0" TextWrapping="Wrap" Text="              Wallpaper" VerticalAlignment="Top" IsReadOnly="True" Height="36" Width="208" TextChanged="TextBox_TextChanged"/>
+        <ComboBox x:Name="MusicOnOff" HorizontalAlignment="Left" Margin="115,215,0,0" VerticalAlignment="Top" Width="132" SelectedIndex="0">
+            <ComboBoxItem Content="On" Height="100" Width="100"/>
+            <ComboBoxItem Content="Off"/>
+        </ComboBox>
+        <ComboBox x:Name="WallPaper" HorizontalAlignment="Left" Margin="85,394,0,0" VerticalAlignment="Top" Width="208" SelectedIndex="0">
+            <ComboBoxItem Content="Volcano" Height="100" Width="100"/>
+            <ComboBoxItem Content="Ocean"/>
+            <ComboBoxItem Content="Sky"/>
+            <ComboBoxItem Content="Beach"/>
+            <ComboBoxItem Content="None"/>
+        </ComboBox>
+        <TextBox HorizontalAlignment="Left" Margin="789,24,0,0" TextWrapping="Wrap" Text="        Add new wallpaper" VerticalAlignment="Top" RenderTransformOrigin="-0.101,-0.778" Width="281" IsReadOnly="True" FontSize="20"/>
+        <TextBox HorizontalAlignment="Left" Margin="621,163,-51,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.101,-0.778" Width="796" Height="98" TextChanged="filetext"/>
+        <TextBox HorizontalAlignment="Left" Height="7" Margin="866,229,0,0" TextWrapping="Wrap" Text="               Drag Image Here" VerticalAlignment="Top" Width="281" FontSize="16" IsReadOnly="True"/>
+        <Button x:Name="Ok" Content="OK" HorizontalAlignment="Left" Margin="677,662,0,0" VerticalAlignment="Top" Width="131" Height="45" FontSize="16" FontWeight="Bold" Background="White" Foreground="Red" Click="OK_Click"/>
+
+    </Grid>
+</Page>

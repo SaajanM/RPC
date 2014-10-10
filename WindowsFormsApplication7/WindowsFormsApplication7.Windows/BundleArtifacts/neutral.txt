@@ -1,0 +1,2 @@
+MainPackage=C:\Users\saaja_000\Documents\WindowsFormsApplication7\WindowsFormsApplication7\WindowsFormsApplication7.Windows\bin\Release\WindowsFormsApplication7.Windows_1.1.0.1_Bundle\WindowsFormsApplication7.Windows_1.1.0.1_AnyCPU.appx
+SymbolPackage=C:\Users\saaja_000\Documents\WindowsFormsApplication7\WindowsFormsApplication7\WindowsFormsApplication7.Windows\AppPackages\WindowsFormsApplication7.Windows_1.1.0.1_Test\WindowsFormsApplication7.Windows_1.1.0.1_AnyCPU.appxsym
