@@ -46,6 +46,7 @@ namespace RockPaperScissorsChallenge
         public MainPage()
         {
             InitializeComponent();
+           
         }
         string file = null;
         string file1 = null;
@@ -422,7 +423,7 @@ namespace RockPaperScissorsChallenge
         
         private async void Form1_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
             XmlDocument doc = new XmlDocument();
             XmlElement child = doc.CreateElement("child");
             XmlElement back = doc.CreateElement("back");
@@ -434,12 +435,17 @@ namespace RockPaperScissorsChallenge
             XmlElement music = doc.CreateElement("music");
             music.InnerText = "on";
             child.AppendChild(music);
+            doc.AppendChild(child);
             Windows.Storage.StorageFile dt = await ApplicationData.Current.LocalFolder.CreateFileAsync("DataFile.xml", CreationCollisionOption.OpenIfExists);
             
+            StorageFile dtchecker = await ApplicationData.Current.LocalFolder.CreateFileAsync("GameDataChecker.xml", CreationCollisionOption.ReplaceExisting);
+            if (dt.IsEqual(dtchecker))
+            {
+                await doc.SaveToFileAsync(dt);
+            }
 
             
-            await doc.SaveToFileAsync(dt
-                );
+            
          }
        
         private void rockRealeased1(object sender, PointerRoutedEventArgs e)

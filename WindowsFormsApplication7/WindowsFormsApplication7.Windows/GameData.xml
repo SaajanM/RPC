@@ -1,9 +1,6 @@
-﻿<?xml version='1.0' encoding='utf-8' ?>
-<root>
-  <child>
-    <back>Ocean</back>
+﻿  <child>
+    <back>Volcano</back>
   <notillvic>10</notillvic>
-  <music>true</music>
-
+  <music>On</music>
 </child>
-</root> 
+
