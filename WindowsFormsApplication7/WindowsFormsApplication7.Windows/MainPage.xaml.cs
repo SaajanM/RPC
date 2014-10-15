@@ -421,7 +421,7 @@ namespace RockPaperScissorsChallenge
             }
         }
         
-        private async void Form1_Loaded(object sender, RoutedEventArgs e)
+        public async void Form1_Loaded(object sender, RoutedEventArgs e)
         {
             
             XmlDocument doc = new XmlDocument();
