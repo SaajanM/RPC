@@ -443,8 +443,56 @@ namespace RockPaperScissorsChallenge
             {
                 await doc.SaveToFileAsync(dt);
             }
-
+            XDocument reader = XDocument.Load(ApplicationData.Current.LocalFolder.Path.ToString() + "/DataFile.xml");
             
+           
+            if (reader.Element("child").Element("back").Value=="Ocean")
+            {
+                ImageBrush Ocean = new ImageBrush();
+                Ocean.ImageSource = new BitmapImage(new Uri("http://content.screencast.com/users/math5/folders/Jing/media/e0c34ad8-9fa2-4e09-a107-a441d31674e8/2014-08-10_0941.png"));
+                grid1.Background = Ocean;
+                WallPaper.SelectedIndex = 1;
+            }
+            else if ( reader.Element("child").Element("back").Value == "Sky")
+            {
+                ImageBrush sky = new ImageBrush();
+                sky.ImageSource = new BitmapImage(new Uri("http://content.screencast.com/users/math5/folders/Jing/media/38ec16b0-0db1-49b5-99db-5ca53a8f592b/2014-08-10_0939.png"));
+                grid1.Background = sky;
+                WallPaper.SelectedIndex = 2;
+            }
+            else if ( reader.Element("child").Element("back").Value == "Beach")
+            {
+
+
+
+                ImageBrush Beach = new ImageBrush();
+                Beach.ImageSource = new BitmapImage(new Uri("http://content.screencast.com/users/math5/folders/Jing/media/0939cc63-964a-40cd-baf1-ff893813370c/2014-08-10_0937.png"));
+                grid1.Background = Beach;
+                WallPaper.SelectedIndex = 3;
+            }
+            else if ( reader.Element("child").Element("back").Value == "Black")
+            {
+
+                grid1.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(0, 0, 0, 0));
+                WallPaper.SelectedIndex = 4;
+
+            }
+            else if ( reader.Element("child").Element("back").Value == "Custom")
+            {
+                ImageBrush add = new ImageBrush();
+                add.ImageSource = new BitmapImage(new Uri("ms-appdata:///local/newImage.jpg"));
+                grid1.Background = add;
+                WallPaper.Items.Add("Custom");
+                WallPaper.SelectedIndex = 5;
+            }
+            wins.Text = reader.Element("child").Element("notillvic").Value;
+            MusicOnOff.PlaceholderText = reader.Element("child").Element("music").Value;
+           if (MusicOnOff.SelectedIndex == 1)
+           {
+               win.IsMuted = true;
+               lose.IsMuted = true;
+               tie.IsMuted = true;
+           }
             
          }
        
@@ -468,6 +516,42 @@ namespace RockPaperScissorsChallenge
             yourPictureChoice.Source = scissorPicture.Source;
             make_computer_choice();
         }
+
+        private void Form1_Unloaded(object sender, RoutedEventArgs e)
+        {
+            XDocument writer = XDocument.Load(ApplicationData.Current.LocalFolder.Path.ToString() + "/DataFile.xml");
+             if (WallPaper.SelectedIndex == 1)
+            {
+                writer.Element("child").Element("back").SetValue("Ocean");
+            }
+            else if (WallPaper.SelectedIndex == 2)
+            {
+                writer.Element("child").Element("back").SetValue("Sky");
+            }
+            else if (WallPaper.SelectedIndex == 3)
+            {
+                writer.Element("child").Element("back").SetValue("Beach");
+            }
+            else if (WallPaper.SelectedIndex == 4)
+            {
+                writer.Element("child").Element("back").SetValue("Black");
+            }
+            else if (WallPaper.SelectedIndex == 5)
+            {
+                writer.Element("child").Element("back").SetValue("Custom");
+            }
+             writer.Element("child").Element("notillvic").SetValue(wins.Text);
+             if (MusicOnOff.SelectedIndex == 0)
+             {
+                 writer.Element("child").Element("music").SetValue("On");
+             }
+             else if (MusicOnOff.SelectedIndex == 1)
+             {
+                 writer.Element("child").Element("music").SetValue("Off");
+             }
+        }
+
+        
 
         
             

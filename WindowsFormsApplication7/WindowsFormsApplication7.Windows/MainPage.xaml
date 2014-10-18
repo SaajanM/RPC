@@ -6,12 +6,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     x:Class="RockPaperScissorsChallenge.MainPage"
-    mc:Ignorable="d" Loaded="Form1_Loaded">
+    mc:Ignorable="d" Loaded="Form1_Loaded" Unloaded="Form1_Unloaded">
     <Page.Background>
         <ImageBrush Stretch="Fill"/>
     </Page.Background>
 
     <Grid x:Name="grid1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="895*"/>
+            <ColumnDefinition Width="471*"/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="Assets/volcano.jpg"/>
         </Grid.Background>
@@ -23,18 +27,18 @@
         <Image x:Name="rockPicture" HorizontalAlignment="Left" Height="280" Margin="37,227,0,0" VerticalAlignment="Top" Width="191" Source="Assets/rock.png" Grid.RowSpan="2" PointerReleased="rockRealeased1"/>
         <Image x:Name="paperPicture" HorizontalAlignment="Left" Height="280" Margin="277,227,0,0" VerticalAlignment="Top" Width="183" Source="Assets/paper.png" Grid.RowSpan="2" PointerReleased="paperRealesed1"/>
         <Image x:Name="scissorPicture" HorizontalAlignment="Left" Height="280" Margin="519,227,0,0" VerticalAlignment="Top" Width="186" Source="Assets/scissors.png" Grid.RowSpan="2" PointerReleased="scissorsRealesed1"/>
-        <Image x:Name="yourPictureChoice" HorizontalAlignment="Left" Height="307" Margin="791,46,0,0" VerticalAlignment="Top" Width="205" Grid.RowSpan="2"/>
-        <TextBox x:Name="You" HorizontalAlignment="Left" Margin="791,10,0,0" TextWrapping="Wrap" Text="Your Choice" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18"/>
-        <TextBox x:Name="Comp" HorizontalAlignment="Left" Margin="791,72,0,0" TextWrapping="Wrap" Text="Computer Choice" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1"/>
-        <Image x:Name="computerPictureChoice" HorizontalAlignment="Left" Height="307" Margin="791,113,0,0" VerticalAlignment="Top" Width="205" Grid.Row="1"/>
-        <TextBox x:Name="Draws" HorizontalAlignment="Left" Margin="552,328,0,0" TextWrapping="Wrap" Text="Draws" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1"/>
-        <TextBox x:Name="Losses" HorizontalAlignment="Left" Margin="295,328,0,0" TextWrapping="Wrap" Text="Losses" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1"/>
-        <TextBox x:Name="Wins" HorizontalAlignment="Left" Margin="37,328,0,0" TextWrapping="Wrap" Text="Wins" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1"/>
-        <TextBox x:Name="drawsEditBox" HorizontalAlignment="Left" Margin="552,379,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1"/>
-        <TextBox x:Name="lossesEditBox" HorizontalAlignment="Left" Margin="295,379,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1"/>
-        <TextBox x:Name="winsEditBox" HorizontalAlignment="Left" Margin="37,379,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18"  Grid.Row="1"/>
-        <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Margin="1147,11,0,0" VerticalAlignment="Top" Width="140" Height="53" RenderTransformOrigin="0.912,0.75" Background="White" Foreground="Red" FontWeight="Bold" FontSize="16" Click="ResetClick"/>
-        <Button x:Name="options" Content="Options" HorizontalAlignment="Left" Margin="1147,314,0,0" VerticalAlignment="Top" Width="140" Height="53" RenderTransformOrigin="0.912,0.75" Background="White" Foreground="Red" FontWeight="Bold" FontSize="16" Grid.Row="1" Click="Options_Click"/>
+        <Image x:Name="yourPictureChoice" HorizontalAlignment="Left" Height="307" Margin="791,46,0,0" VerticalAlignment="Top" Width="205" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="You" HorizontalAlignment="Left" Margin="791,10,0,0" TextWrapping="Wrap" Text="Your Choice" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" IsReadOnly="True" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="Comp" HorizontalAlignment="Left" Margin="791,72,0,0" TextWrapping="Wrap" Text="Computer Choice" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1" IsReadOnly="True" Grid.ColumnSpan="2"/>
+        <Image x:Name="computerPictureChoice" HorizontalAlignment="Left" Height="307" Margin="791,113,0,0" VerticalAlignment="Top" Width="205" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="Draws" HorizontalAlignment="Left" Margin="552,328,0,0" TextWrapping="Wrap" Text="Draws" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1" IsReadOnly="True"/>
+        <TextBox x:Name="Losses" HorizontalAlignment="Left" Margin="295,328,0,0" TextWrapping="Wrap" Text="Losses" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1" IsReadOnly="True"/>
+        <TextBox x:Name="Wins" HorizontalAlignment="Left" Margin="37,328,0,0" TextWrapping="Wrap" Text="Wins" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1" IsReadOnly="True"/>
+        <TextBox x:Name="drawsEditBox" HorizontalAlignment="Left" Margin="552,379,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1" IsReadOnly="True"/>
+        <TextBox x:Name="lossesEditBox" HorizontalAlignment="Left" Margin="295,379,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18" Grid.Row="1" IsReadOnly="True"/>
+        <TextBox x:Name="winsEditBox" HorizontalAlignment="Left" Margin="37,379,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="205" Background="Transparent" Foreground="Blue" FontWeight="Bold" FontSize="18"  Grid.Row="1" IsReadOnly="True"/>
+        <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Margin="252,11,0,0" VerticalAlignment="Top" Width="140" Height="53" RenderTransformOrigin="0.912,0.75" Background="White" Foreground="Red" FontWeight="Bold" FontSize="16" Click="ResetClick" Grid.Column="1"/>
+        <Button x:Name="options" Content="Options" HorizontalAlignment="Left" Margin="252,314,0,0" VerticalAlignment="Top" Width="140" Height="53" RenderTransformOrigin="0.912,0.75" Background="White" Foreground="Red" FontWeight="Bold" FontSize="16" Grid.Row="1" Click="Options_Click" Grid.Column="1"/>
         <TextBox x:Name="text" HorizontalAlignment="Left" Margin="24,24,0,0" TextWrapping="Wrap" Text="Number of wins until victory" VerticalAlignment="Top" IsReadOnly="True" Height="46" Visibility="Collapsed"/>
         <TextBox x:Name="wins" HorizontalAlignment="Left" Margin="54,89,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" RenderTransformOrigin="-0.101,-0.778" Width="132" Visibility="Collapsed"/>
         <TextBox x:Name="text1" HorizontalAlignment="Left" Margin="24,149,0,0" TextWrapping="Wrap" Text="           Sound Effects" VerticalAlignment="Top" IsReadOnly="True" Height="36" Width="208"  Visibility="Collapsed"/>
@@ -50,14 +54,14 @@
             <ComboBoxItem Content="Beach"/>
             <ComboBoxItem Content="None"/>
         </ComboBox>
-        <TextBox x:Name="text3" HorizontalAlignment="Left" Margin="789,24,0,0" TextWrapping="Wrap" Text="        Add new wallpaper" VerticalAlignment="Top" RenderTransformOrigin="-0.101,-0.778" Width="281" IsReadOnly="True" FontSize="20" Visibility="Collapsed"/>
-        <TextBox x:Name="filepath" HorizontalAlignment="Left" Margin="538,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.101,-0.778" Width="796" Height="98" Visibility="Collapsed" TextChanged="filetext" AllowDrop="True"/>
+        <TextBox x:Name="text3" HorizontalAlignment="Left" Margin="789,24,0,0" TextWrapping="Wrap" Text="        Add new wallpaper" VerticalAlignment="Top" RenderTransformOrigin="-0.101,-0.778" Width="281" IsReadOnly="True" FontSize="20" Visibility="Collapsed" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="filepath" HorizontalAlignment="Left" Margin="538,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.101,-0.778" Width="796" Height="98" Visibility="Collapsed" TextChanged="filetext" AllowDrop="True" Grid.ColumnSpan="2"/>
         <Button Content="OK" HorizontalAlignment="Left" Margin="619,359,0,0" VerticalAlignment="Top" Width="131" Height="45" FontSize="16" FontWeight="Bold" Background="White" Foreground="Red" Click="OK_Click" Grid.Row="1" Visibility="Collapsed"/>
-        <Button x:Name="text4" HorizontalAlignment="Left" Height="44" Margin="801,158,0,0" VerticalAlignment="Top" Width="281" FontSize="16"  Visibility="Collapsed" Click="text4clicked" Content="Browse" Background="White" Foreground="Red"/>
+        <Button x:Name="text4" HorizontalAlignment="Left" Height="44" Margin="801,158,0,0" VerticalAlignment="Top" Width="281" FontSize="16"  Visibility="Collapsed" Click="text4clicked" Content="Browse" Background="White" Foreground="Red" Grid.ColumnSpan="2"/>
         <Button x:Name="Ok" Content="OK" HorizontalAlignment="Left" Margin="616,386,0,0" VerticalAlignment="Top" Width="131" Height="45" FontSize="16" FontWeight="Bold" Background="White" Foreground="Red" Click="OK_Click" Grid.Row="1" Visibility="Collapsed"/>
 
-        <MediaElement x:Name="win" AudioCategory="GameEffects" Source="Assets/TadaSound.wav" AutoPlay="False" Visibility="Collapsed"/>
-        <MediaElement x:Name="tie" AudioCategory="GameEffects" Source="Assets/Tie.wav" AutoPlay="False" Visibility="Collapsed"/>
-        <MediaElement x:Name="lose" AudioCategory="GameEffects" Source="Assets/fail.wav" AutoPlay="False" Visibility="Collapsed"/>
+        <MediaElement x:Name="win" AudioCategory="GameEffects" Source="Assets/TadaSound.wav" AutoPlay="False" Visibility="Collapsed" Margin="683,150,211,149"/>
+        <MediaElement x:Name="tie" AudioCategory="GameEffects" Source="Assets/Tie.wav" AutoPlay="False" Visibility="Collapsed" Margin="683,150,211,149"/>
+        <MediaElement x:Name="lose" AudioCategory="GameEffects" Source="Assets/fail.wav" AutoPlay="False" Visibility="Collapsed" Margin="683,150,211,149"/>
     </Grid>
 </Page>
