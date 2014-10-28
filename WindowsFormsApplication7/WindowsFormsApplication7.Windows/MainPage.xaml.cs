@@ -317,8 +317,53 @@ namespace RockPaperScissorsChallenge
                 WallPaper.Items.Add(Path.GetFileNameWithoutExtension(file9));
             }
         }
-        private void OK_Click(object sender, RoutedEventArgs e)
+        private async void OK_Click(object sender, RoutedEventArgs e)
         {
+            StorageFile storagefile = await ApplicationData.Current.LocalFolder.CreateFileAsync("DataFile.xml",CreationCollisionOption.ReplaceExisting);
+            StorageFile storage= await StorageFile.GetFileFromPathAsync(ApplicationData.Current.LocalFolder.Path.ToString()+"\\DataFile.xml");
+            Stream filestream = await storage.OpenStreamForWriteAsync();
+
+            XDocument writer = new XDocument(new XDeclaration("1.0", "utf-8", "yes"));
+            XElement child = new XElement("child");
+            XElement back = new XElement("back");
+            XElement notillvic = new XElement("notillvic");
+            XElement music = new XElement("music");
+            
+    if (WallPaper.SelectedIndex == 1)
+    {
+        back.Value = "Ocean";
+    } 
+    else if (WallPaper.SelectedIndex == 2)
+    {
+        back.Value="Sky";
+    }
+    else if (WallPaper.SelectedIndex == 3)
+    {
+        back.Value = "Beach";
+    }
+    else if (WallPaper.SelectedIndex == 4)
+    {
+        back.Value="Black";
+    }
+    else if (WallPaper.SelectedIndex == 5)
+    {
+        back.Value="Custom";
+    }
+   notillvic.Value=wins.Text;
+    if (MusicOnOff.SelectedIndex == 0)
+    {
+        music.Value="On";
+    }
+    else if (MusicOnOff.SelectedIndex == 1)
+    {
+        music.Value="Off";
+        
+    }
+
+    child.Add(back, notillvic, music);
+    writer.Add(child);
+    writer.Save(filestream);
+
             if (MusicOnOff.SelectedIndex == 1)
             {
                 win.IsMuted = true;
@@ -398,7 +443,13 @@ namespace RockPaperScissorsChallenge
          computerPictureChoice.Visibility = Visibility.Visible;
          Reset.Visibility = Visibility.Visible;
          options.Visibility = Visibility.Visible;
+         
+         
         }
+
+       
+
+        
 
         
 
@@ -423,26 +474,27 @@ namespace RockPaperScissorsChallenge
         
         public async void Form1_Loaded(object sender, RoutedEventArgs e)
         {
+
+            XDocument doc = new XDocument(new XDeclaration("1.0","utf-8","yes"));
+            doc.Add(new XElement("child",
+                new XElement("back", "Volcano"),
+                new XElement("notillvic", "10"),
+                new XElement("music", "On")
+                ));
             
-            XmlDocument doc = new XmlDocument();
-            XmlElement child = doc.CreateElement("child");
-            XmlElement back = doc.CreateElement("back");
-            back.InnerText = "Volcano";
-            child.AppendChild(back);
-            XmlElement notillvic = doc.CreateElement("notillvic");
-            notillvic.InnerText = "10";
-            child.AppendChild(notillvic);
-            XmlElement music = doc.CreateElement("music");
-            music.InnerText = "on";
-            child.AppendChild(music);
-            doc.AppendChild(child);
+            
             Windows.Storage.StorageFile dt = await ApplicationData.Current.LocalFolder.CreateFileAsync("DataFile.xml", CreationCollisionOption.OpenIfExists);
-            
             StorageFile dtchecker = await ApplicationData.Current.LocalFolder.CreateFileAsync("GameDataChecker.xml", CreationCollisionOption.ReplaceExisting);
-            if (dt.IsEqual(dtchecker))
-            {
-                await doc.SaveToFileAsync(dt);
-            }
+            StorageFile streamfile = await StorageFile.GetFileFromPathAsync(ApplicationData.Current.LocalFolder.Path + "\\DataFile.xml");
+            if (dt == dtchecker)
+        
+                using (Stream filestream = await streamfile.OpenStreamForWriteAsync())
+                {
+
+                    doc.Save(filestream);
+
+                }
+            
             XDocument reader = XDocument.Load(ApplicationData.Current.LocalFolder.Path.ToString() + "/DataFile.xml");
             
            
@@ -516,39 +568,10 @@ namespace RockPaperScissorsChallenge
             yourPictureChoice.Source = scissorPicture.Source;
             make_computer_choice();
         }
-
+       
         private void Form1_Unloaded(object sender, RoutedEventArgs e)
         {
-            XDocument writer = XDocument.Load(ApplicationData.Current.LocalFolder.Path.ToString() + "/DataFile.xml");
-             if (WallPaper.SelectedIndex == 1)
-            {
-                writer.Element("child").Element("back").SetValue("Ocean");
-            }
-            else if (WallPaper.SelectedIndex == 2)
-            {
-                writer.Element("child").Element("back").SetValue("Sky");
-            }
-            else if (WallPaper.SelectedIndex == 3)
-            {
-                writer.Element("child").Element("back").SetValue("Beach");
-            }
-            else if (WallPaper.SelectedIndex == 4)
-            {
-                writer.Element("child").Element("back").SetValue("Black");
-            }
-            else if (WallPaper.SelectedIndex == 5)
-            {
-                writer.Element("child").Element("back").SetValue("Custom");
-            }
-             writer.Element("child").Element("notillvic").SetValue(wins.Text);
-             if (MusicOnOff.SelectedIndex == 0)
-             {
-                 writer.Element("child").Element("music").SetValue("On");
-             }
-             else if (MusicOnOff.SelectedIndex == 1)
-             {
-                 writer.Element("child").Element("music").SetValue("Off");
-             }
+            
         }
 
         
