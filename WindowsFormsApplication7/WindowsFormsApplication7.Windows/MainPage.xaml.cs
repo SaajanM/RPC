@@ -474,19 +474,22 @@ namespace RockPaperScissorsChallenge
         
         public async void Form1_Loaded(object sender, RoutedEventArgs e)
         {
-
-            XDocument doc = new XDocument(new XDeclaration("1.0","utf-8","yes"));
-            doc.Add(new XElement("child",
-                new XElement("back", "Volcano"),
-                new XElement("notillvic", "10"),
-                new XElement("music", "On")
-                ));
-            
-            
-            Windows.Storage.StorageFile dt = await ApplicationData.Current.LocalFolder.CreateFileAsync("DataFile.xml", CreationCollisionOption.OpenIfExists);
-            StorageFile dtchecker = await ApplicationData.Current.LocalFolder.CreateFileAsync("GameDataChecker.xml", CreationCollisionOption.ReplaceExisting);
+            XDocument doc = new XDocument();
+            StorageFile filegeter;
+            try
+            {
+                filegeter = await ApplicationData.Current.LocalFolder.GetFileAsync("DataFiile.xml");
+            }catch(FileNotFoundException){
+                filegeter = null;
+                doc.Declaration = new XDeclaration("1.0", "utf-8", "yes");
+                doc.Add(new XElement("child",
+                    new XElement("back", "Volcano"),
+                    new XElement("notillvic", "10"),
+                    new XElement("music", "On")
+                    ));
+            }
+            Windows.Storage.StorageFile dt = await ApplicationData.Current.LocalFolder.CreateFileAsync("DataFile.xml");
             StorageFile streamfile = await StorageFile.GetFileFromPathAsync(ApplicationData.Current.LocalFolder.Path + "\\DataFile.xml");
-            if (dt == dtchecker)
         
                 using (Stream filestream = await streamfile.OpenStreamForWriteAsync())
                 {
