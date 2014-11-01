@@ -319,7 +319,7 @@ namespace RockPaperScissorsChallenge
         }
         private async void OK_Click(object sender, RoutedEventArgs e)
         {
-            StorageFile storagefile = await ApplicationData.Current.LocalFolder.CreateFileAsync("DataFile.xml",CreationCollisionOption.ReplaceExisting);
+            StorageFile replace = await ApplicationData.Current.LocalFolder.CreateFileAsync("DataFile.xml", CreationCollisionOption.ReplaceExisting);
             StorageFile storage= await StorageFile.GetFileFromPathAsync(ApplicationData.Current.LocalFolder.Path.ToString()+"\\DataFile.xml");
             Stream filestream = await storage.OpenStreamForWriteAsync();
 
@@ -360,7 +360,7 @@ namespace RockPaperScissorsChallenge
         
     }
 
-    child.Add(back, notillvic, music);
+    child.Add(back,music,notillvic);
     writer.Add(child);
     writer.Save(filestream);
 
@@ -473,32 +473,39 @@ namespace RockPaperScissorsChallenge
         }
         
         public async void Form1_Loaded(object sender, RoutedEventArgs e)
-        {
+        {XDeclaration dec= new XDeclaration("1.0","utf-8","yes");
+            StorageFile checkfordata;
             XDocument doc = new XDocument();
-            StorageFile filegeter;
-            try
-            {
-                filegeter = await ApplicationData.Current.LocalFolder.GetFileAsync("DataFiile.xml");
-            }catch(FileNotFoundException){
-                filegeter = null;
-                doc.Declaration = new XDeclaration("1.0", "utf-8", "yes");
-                doc.Add(new XElement("child",
-                    new XElement("back", "Volcano"),
-                    new XElement("notillvic", "10"),
-                    new XElement("music", "On")
-                    ));
+            try { 
+                 checkfordata = await ApplicationData.Current.LocalFolder.GetFileAsync("DataFile.xml"); 
             }
-            Windows.Storage.StorageFile dt = await ApplicationData.Current.LocalFolder.CreateFileAsync("DataFile.xml");
-            StorageFile streamfile = await StorageFile.GetFileFromPathAsync(ApplicationData.Current.LocalFolder.Path + "\\DataFile.xml");
-        
-                using (Stream filestream = await streamfile.OpenStreamForWriteAsync())
-                {
-
-                    doc.Save(filestream);
-
-                }
+            catch(FileNotFoundException){
+                checkfordata = null;
+                doc.Declaration=dec;
+                XElement back = new XElement("back", "Volcano");
+                XElement music = new XElement("music", "On");
+                XElement notillvic = new XElement("notillvic", "10");
+                XElement child = new XElement("child",back,music,notillvic);
+                doc.Add(child);
+                            }
             
-            XDocument reader = XDocument.Load(ApplicationData.Current.LocalFolder.Path.ToString() + "/DataFile.xml");
+            
+            StorageFile dt = await ApplicationData.Current.LocalFolder.CreateFileAsync("DataFile.xml",CreationCollisionOption.OpenIfExists);
+            StorageFile streamfile = await StorageFile.GetFileFromPathAsync(ApplicationData.Current.LocalFolder.Path + "\\DataFile.xml");
+            using (Stream filestream = await streamfile.OpenStreamForWriteAsync())
+            {
+                if (doc.Declaration == dec)
+                {
+                    doc.Save(filestream);
+                }
+            }
+
+                    
+
+                
+         
+            XDocument reader = XDocument.Load(ApplicationData.Current.LocalFolder.Path.ToString() + "\\DataFile.xml");
+            
             
            
             if (reader.Element("child").Element("back").Value=="Ocean")
