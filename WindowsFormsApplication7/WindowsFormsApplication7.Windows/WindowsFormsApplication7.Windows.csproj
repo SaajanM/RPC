@@ -107,7 +107,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -120,7 +119,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="packages.config" />
     <None Include="rpc.pfx" />
     <None Include="WindowsFormsApplication7.Windows_StoreKey.pfx" />
     <None Include="WindowsFormsApplication7.Windows_TemporaryKey.pfx" />
@@ -189,12 +187,7 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MugenInjection.Core">
-      <HintPath>..\..\packages\MugenInjection.3.5.1\lib\netcore45\MugenInjection.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="MugenInjection.Xml">
-      <HintPath>..\..\packages\MugenInjection.Xml.1.1.0\lib\netcore45\MugenInjection.Xml.dll</HintPath>
-    </Reference>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

@@ -28,11 +28,8 @@ using Windows.Data.Xml.Dom;
 using System.Xml.Linq;
 using Windows.Data.Xml.Xsl;
 using System.Xml.Schema;
-using MugenInjection.Xml.Components;
-using MugenInjection.Xml.Infrastructure;
-using MugenInjection.Xml.Interface.Components;
-using MugenInjection.Xml.Interface;
-using MugenInjection.Xml.Modules;
+using System.Net.Http;
+using Windows.System;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -80,8 +77,20 @@ namespace RockPaperScissorsChallenge
             
         }
 
-        
-       
+        private async void VersionDownload()
+        {
+
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("http://apps.microsoft.com/windows/en-us/app/rockpaperscissors-challenge/48f0d3e8-1fcf-42e8-983c-928f7e0162f6"));
+            Application.Current.Exit();
+        }
+
+        private async void Download()
+        {
+            var results = new MessageDialog("New version detected. Would you like to download?", "RPC CHALLENGE");
+            results.Commands.Add(new UICommand("Yes", (UICommandInvokedHandler) => VersionDownload()));
+            results.Commands.Add(new UICommand("No"));
+            await results.ShowAsync();
+        }
         private void make_computer_choice()
         {
             
@@ -473,7 +482,18 @@ namespace RockPaperScissorsChallenge
         }
         
         public async void Form1_Loaded(object sender, RoutedEventArgs e)
-        {XDeclaration dec= new XDeclaration("1.0","utf-8","yes");
+        {
+            StorageFile version =await ApplicationData.Current.LocalFolder.CreateFileAsync("Version.xml",CreationCollisionOption.ReplaceExisting);
+            XDocument versionlocalwrite = new XDocument();
+            
+            XDeclaration dec= new XDeclaration("1.0","utf-8","yes");
+            versionlocalwrite.Declaration = dec;
+            versionlocalwrite.Add(new XElement("child", new XElement("version", "2.0.0.0")));
+            using (Stream saveversion = await version.OpenStreamForWriteAsync())
+            {
+                versionlocalwrite.Save(saveversion);
+            }
+            VersionChecker();
             StorageFile checkfordata;
             XDocument doc = new XDocument();
             try { 
@@ -557,6 +577,16 @@ namespace RockPaperScissorsChallenge
            }
             
          }
+
+        private void VersionChecker()
+        {
+            XDocument versionlocal = XDocument.Load(ApplicationData.Current.LocalFolder.Path.ToString()+"\\Version.xml");
+            XDocument versionserver = XDocument.Load("https://raw.githubusercontent.com/SaajanM/version/master/version.xml");
+            if (versionserver.Element("child").Element("version").Value != versionlocal.Element("child").Element("version").Value)
+            {
+                Download();
+            }
+        }
        
         private void rockRealeased1(object sender, PointerRoutedEventArgs e)
         {
