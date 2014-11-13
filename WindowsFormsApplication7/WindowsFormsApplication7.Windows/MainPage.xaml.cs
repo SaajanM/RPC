@@ -32,7 +32,7 @@ using System.Net.Http;
 using Windows.System;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
+//Nothing just update name fix!:)
 namespace RockPaperScissorsChallenge
 {
     /// <summary>
